@@ -32,6 +32,7 @@ import org.opentripplanner.routing.core.State;
 import org.opentripplanner.routing.core.StateEditor;
 import org.opentripplanner.routing.core.TraverseMode;
 import org.opentripplanner.routing.graph.Edge;
+import org.opentripplanner.routing.graph.Vertex;
 import org.opentripplanner.routing.patch.Alert;
 import org.opentripplanner.routing.util.ElevationProfileSegment;
 import org.opentripplanner.routing.util.ElevationUtils;
@@ -538,5 +539,19 @@ public class PlainStreetEdge extends StreetEdge implements Cloneable {
         }
         return super.detachFrom();
     }
+    
+	public Vertex getFromVertex() {
+		if (fromv == null) {
+			LOG.info("Returning null vertex from edge {}", this.getId());
+		}
+		return fromv;
+	}
+
+	public Vertex getToVertex() {
+		if (fromv == null) {
+			LOG.info("Returning null vertex from edge {}", this.getId());
+		}
+		return tov;
+	}
 
 }
