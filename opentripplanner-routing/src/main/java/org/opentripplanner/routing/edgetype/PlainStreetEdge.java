@@ -31,6 +31,7 @@ import org.opentripplanner.routing.core.RoutingRequest;
 import org.opentripplanner.routing.core.State;
 import org.opentripplanner.routing.core.StateEditor;
 import org.opentripplanner.routing.core.TraverseMode;
+import org.opentripplanner.routing.core.TraverseModeSet;
 import org.opentripplanner.routing.graph.Edge;
 import org.opentripplanner.routing.graph.Vertex;
 import org.opentripplanner.routing.patch.Alert;
@@ -184,9 +185,14 @@ public class PlainStreetEdge extends StreetEdge implements Cloneable {
             }
         }
         
-        return permission.allows(options.getModes());
+        return canTraverse(options.getModes());
     }
-
+    
+    @Override
+    public boolean canTraverse(TraverseModeSet modes) {
+        return permission.allows(modes);
+    }
+    
     private boolean canTraverse(RoutingRequest options, TraverseMode mode) {
         if (options.wheelchairAccessible) {
             if (!wheelchairAccessible) {
